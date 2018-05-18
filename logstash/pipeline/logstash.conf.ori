@@ -1,6 +1,6 @@
 input {
-	beats {
-		port => 5044
+	tcp {
+		port => 5000
 	}
 }
 

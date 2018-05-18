@@ -1,0 +1,5 @@
+2018-05-18T09:26:56.137Z	INFO	instance/beat.go:468	Home path: [/usr/share/filebeat/config] Config path: [/usr/share/filebeat/config] Data path: [/usr/share/filebeat/config/data] Logs path: [/usr/share/filebeat/config/logs]
+2018-05-18T09:26:56.145Z	INFO	instance/beat.go:475	Beat UUID: 358e9873-b08a-4f1b-9a9f-c569958c692b
+2018-05-18T09:26:56.145Z	INFO	instance/beat.go:213	Setup Beat: filebeat; Version: 6.2.4
+2018-05-18T09:26:56.145Z	INFO	pipeline/module.go:76	Beat name: a06f6158eced
+2018-05-18T09:26:56.146Z	ERROR	fileset/modules.go:95	Not loading modules. Module directory not found: /usr/share/filebeat/config/module

@@ -1,0 +1,8 @@
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /tmp/log/*log*
+    #- c:\programdata\elasticsearch\logs\*
+output.logstash:
+  hosts: ['logstash:5044']
