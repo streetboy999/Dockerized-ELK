@@ -50,7 +50,7 @@ services:
     volumes:
       - ./filebeat/config/:/usr/share/filebeat/config:rw
       - ./filebeat/log/:/tmp/log
-    command: -e -c /usr/share/filebeat/config/filebeat.yml
+    command: -e -c /usr/share/filebeat/config/filebeat.yml -d "*"
     networks:
       - elk
     depends_on:
