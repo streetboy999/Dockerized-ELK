@@ -1,0 +1,56 @@
+input {
+    stdin {
+    }
+}
+
+filter {
+    grok {
+        match => ["message", "%{TIMESTAMP_ISO8601:log_time}:%{SPACE}%{WORD:cmd}%{SPACE}%{INT:my_number}"]
+        add_tag => ["CMD TEST"]
+    }
+    date {
+        match => ["log_time", "YYYY-MM-dd HH:mm:ss"]
+#        add_field =>["response_time","%{log_time}"]
+    	target => "@log_time"
+    }
+     mutate {
+      convert => ["my_number", "integer"]     
+     }
+  
+}
+
+filter {
+	grok {
+		match => ["message", "%{TIMESTAMP_ISO8601:log_time}:%{SPACE}%{BASE10NUM:ping_bytes} bytes from %{IPV4:ping_src_ip}: icmp_seq=%{BASE10NUM:ping_icmp_seq}%{SPACE}ttl=%{BASE10NUM:ping_ttl}%{SPACE}time=%{BASE16FLOAT:ping_time} ms"]
+		add_tag => ["PING TEST"]
+	}
+	date {
+		match => ["log_time", "YYYY-MM-dd HH:mm:ss"]
+		target => "@log_time"
+	}
+	mutate {
+		convert => ["ping_time", "float"]
+	}
+}
+
+filter {
+	grok {
+		match => ["message", "%{TIMESTAMP_ISO8601:log_time}:%{SPACE}Request timeout for%{SPACE}icmp_seq%{SPACE}%{BASE10NUM:ping_icmp_seq}"]
+		add_tag => ["PING TEST FOR TIME OUT"]
+	}
+        date {
+                match => ["log_time", "YYYY-MM-dd HH:mm:ss"]
+                target => "@log_time"
+        }
+        mutate {
+                convert => ["ping_icmp_seq", "integer"]
+        }
+}
+
+
+output {
+ stdout {
+	 codec => rubydebug
+ }
+}
+
